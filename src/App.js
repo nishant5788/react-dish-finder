@@ -12,8 +12,8 @@ export default function App() {
   const [dishes, setDishes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [selectedDish, setSelectedDish] = useState(null);
-
   const { isLoading } = FetchDishes(searchInput, setDishes);
+
 
   function handleCloseDish() {
     setSelectedDish(null);
@@ -28,11 +28,26 @@ export default function App() {
       <Header />
       <Search searchInput={searchInput} setSearchInput={setSearchInput} />
 
-      {isLoading ? <Loader />
+      {selectedDish ? (
+  <DishDetails
+    onCloseDish={handleCloseDish}
+    selectedDish={selectedDish}
+  />
+) : isLoading ? (
+  <Loader />
+) : (
+  <DishList
+    dishes={dishes}
+    setDishes={setDishes}
+    onSelectDish={handleSelectDish}
+  />
+)}
+
+      {/* {isLoading ? <Loader />
     :   <DishList dishes={dishes} setDishes={setDishes} onSelectDish={handleSelectDish} />
     }
 
-    <DishDetails onCloseDish={handleCloseDish} selectedDish={selectedDish} />
+    <DishDetails onCloseDish={handleCloseDish} selectedDish={selectedDish} /> */}
       
       <Favorites favorites={favorites} />
 

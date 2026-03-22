@@ -6,6 +6,22 @@ const [dish, setDish] = useState({});
 const [loading, setLoading] = useState(false);
 
 useEffect(function(){
+
+  function callback(e) {
+    if(e.code === 'Escape') {
+      onCloseDish();
+    }
+  }
+
+  document.addEventListener("keydown", callback);
+
+    return function() {
+    document.removeEventListener("keydown", callback);
+    }
+
+}, [onCloseDish]);
+
+useEffect(function(){
   if (!selectedDish) return;
 
   async function getDishDetails() {

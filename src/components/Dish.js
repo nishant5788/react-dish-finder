@@ -1,5 +1,4 @@
 export default function Dish({dish, onSelectDish}) {
-  console.log(dish);
    if (!dish) return null;
     return(
       <div className="card">
