@@ -1,21 +1,46 @@
-export default function DishDetails() {
+import { useEffect, useState } from "react";
+import Loader from "./Loader";
+
+export default function DishDetails({onCloseDish, selectedDish}) {
+const [dish, setDish] = useState({});
+const [loading, setLoading] = useState(false);
+
+useEffect(function(){
+  if (!selectedDish) return;
+
+  async function getDishDetails() {
+    setLoading(true);
+    const res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${selectedDish}`);
+    const data = await res.json();
+    setDish(data.meals[0]);
+    setLoading(false);
+
+  }
+
+  getDishDetails();  
+
+}, [selectedDish]);
+
+ if (!selectedDish) return null;
+  if (loading) return <Loader />;
+  if (!dish.strMeal) return null;
+
     return(
         <div className="details">
-  <button className="back-btn">← Back</button>
+  <button className="back-btn" onClick={onCloseDish}>← Back</button>
 
   <div className="details-card">
-    <img src="meal.jpg" alt="Meal" />
+    <img src={dish.strMealThumb} alt={dish.strMeal} />
 
     <div className="details-content">
-      <h2>Pizza Margherita</h2>
-      <p className="category">Category: Italian</p>
+      <h2>{dish.strMeal}</h2>
+      <p className="category">Category: {dish.strCategory}</p>
+      <p className="category">Type: {dish.strArea}</p>
 
-      <button className="fav-btn">❤️ Add to Favorites</button>
+      <button className="fav-btn">Add to Favorites</button>
 
       <h3>Instructions</h3>
-      <p className="instructions">
-        Mix ingredients, prepare dough, bake in oven...
-      </p>
+      <div className="instructions">{dish.strInstructions}</div>
     </div>
   </div>
 </div>

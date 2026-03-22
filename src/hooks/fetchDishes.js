@@ -23,11 +23,8 @@ export default function FetchDishes(searchInput, setDishes) {
 
           setDishes(data.meals);
 
-          console.log("sss is " + data.meals);
-
           if (data.Response === "False")
             throw new Error("Response is not Found!");
-
 
           setIsLoading(false);
         } catch (err) {
@@ -37,10 +34,10 @@ export default function FetchDishes(searchInput, setDishes) {
         }
       }
 
-      if(searchInput.length < 3) {
-      setDishes([]);
-      return;
-    }
+      if (searchInput.length < 3) {
+        setDishes([]);
+        return;
+      }
 
       fetchDish();
 
