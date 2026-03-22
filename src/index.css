@@ -38,7 +38,7 @@ body {
   font-size: 16px;
 }
 
-.results {
+.results, .favorites-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
@@ -50,6 +50,7 @@ body {
   padding: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   text-align: center;
+  min-height: 284px;
 }
 
 .card img {
@@ -76,4 +77,69 @@ body {
 
 .favorites {
   margin-top: 30px;
+}
+
+
+.details {
+  margin-top: 20px;
+}
+
+.back-btn {
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  border: none;
+  background: #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #ccc;
+}
+
+.details-card {
+  display: flex;
+  gap: 20px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.details-card img {
+  width: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.details-content {
+  flex: 1;
+}
+
+.details-content h2 {
+  margin-bottom: 10px;
+}
+
+.category {
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.fav-btn {
+  padding: 8px 12px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.fav-btn:hover {
+  background: #e63c3c;
+}
+
+.instructions {
+  line-height: 1.6;
+  color: #444;
 }

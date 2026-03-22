@@ -1,26 +1,26 @@
+import { useState } from "react";
+import FetchDishes from "./hooks/fetchDishes";
+import Header from "./components/Header";
+import Search from "./components/Search";
+import Favorites from "./components/Favorites";
+import DishList from "./components/DishList";
+
 export default function App() {
+  const [searchInput, setSearchInput] = useState("");
+  const [dishes, setDishes] = useState([]);
+
+  const { isLoading } = FetchDishes(searchInput, setDishes);
+
+  function handleSearchInput() {}
+
   return (
-    <div class="app">
-  <header class="header">
-    <h1>🍕 Food Explorer</h1>
-    <p>Search delicious meals instantly</p>
-  </header>
+    <div className="app">
+      <Header />
+      <Search searchInput={searchInput} setSearchInput={setSearchInput} />
 
-  <div class="search-box">
-    <input type="text" placeholder="Search pizza, pasta..." />
-  </div>
+      <DishList dishes={dishes} setDishes={setDishes} />
+      <Favorites />
 
-  <div class="results">
-    <div class="card">
-      <img src="meal.jpg" />
-      <h3>Pizza Margherita</h3>
-      <button>View Details</button>
     </div>
-  </div>
-
-  <div class="favorites">
-    <h2>❤️ Favorites</h2>
-  </div>
-</div>
   );
 }
