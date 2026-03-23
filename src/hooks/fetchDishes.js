@@ -45,7 +45,7 @@ export default function FetchDishes(searchInput, setDishes) {
         controller.abort();
       };
     },
-    [searchInput],
+    [searchInput, setDishes],
   );
 
   return { isLoading };
