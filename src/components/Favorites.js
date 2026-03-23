@@ -1,16 +1,25 @@
 import Dish from "./Dish";
 
-export default function Favorites({favorites}) {
-    
-    return(
-        <div className="favorites">
-    <h2>❤️ Favorites</h2>
-    {favorites.length === 0 && <p>No favorite is added!</p>}
+export default function Favorites({ favorites, onDeleteFavorite, onSelectDish }) {
+  return (
+    <div className="favorites">
+      {favorites.length === 0 || (
+        <div>
+          <h2>❤️ Favorites ({favorites.length})</h2>
+        </div>
+      )}
 
-    <div className="favorites-list">
-    <Dish />
-  </div>
-
-  </div>
-    );
+      <div className="favorites-list">
+        {favorites?.map((favorite) => (
+          <Dish
+            dish={favorite}
+            key={favorite.idMeal}
+            favorites={favorites}
+            onDeleteFavorite={onDeleteFavorite}
+            onSelectDish={onSelectDish}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }

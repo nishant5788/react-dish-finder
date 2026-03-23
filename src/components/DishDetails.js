@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
-export default function DishDetails({onCloseDish, selectedDish}) {
+export default function DishDetails({onCloseDish, selectedDish, favorites, onAddFavorite}) {
 const [dish, setDish] = useState({});
 const [loading, setLoading] = useState(false);
+
+const isFavorite = favorites
+    .map((fav) => fav.idMeal)
+    .includes(dish.idMeal);
+
 
 useEffect(function(){
 
@@ -30,7 +35,6 @@ useEffect(function(){
     const data = await res.json();
     setDish(data.meals[0]);
     setLoading(false);
-
   }
 
   getDishDetails();  
@@ -53,7 +57,7 @@ useEffect(function(){
       <p className="category">Category: {dish.strCategory}</p>
       <p className="category">Type: {dish.strArea}</p>
 
-      <button className="fav-btn">Add to Favorites</button>
+      <button disabled={isFavorite} className="fav-btn" onClick={() => onAddFavorite(dish)}>Add to Favorites</button>
 
       <h3>Instructions</h3>
       <div className="instructions">{dish.strInstructions}</div>

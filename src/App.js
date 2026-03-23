@@ -23,6 +23,15 @@ export default function App() {
     setSelectedDish((selectedID) => (id === selectedID ? null : id));
   }
 
+   function handleAddFavorite(dish) {
+  setFavorites((favorites) => [...favorites, dish]);
+   handleCloseDish();
+  }
+
+  function handleDeleteFavorite(id) {
+    setFavorites((fav) => fav.filter((dish) => dish.idMeal !== id));
+  }
+
   return (
     <div className="app">
       <Header />
@@ -32,6 +41,8 @@ export default function App() {
   <DishDetails
     onCloseDish={handleCloseDish}
     selectedDish={selectedDish}
+    onAddFavorite={handleAddFavorite}
+    favorites={favorites}
   />
 ) : isLoading ? (
   <Loader />
@@ -40,16 +51,14 @@ export default function App() {
     dishes={dishes}
     setDishes={setDishes}
     onSelectDish={handleSelectDish}
+    selectedDish={selectedDish}
+    favorites={favorites}
+    onAddFavorite={handleAddFavorite}
+    onDeleteFavorite={handleDeleteFavorite}
   />
 )}
-
-      {/* {isLoading ? <Loader />
-    :   <DishList dishes={dishes} setDishes={setDishes} onSelectDish={handleSelectDish} />
-    }
-
-    <DishDetails onCloseDish={handleCloseDish} selectedDish={selectedDish} /> */}
       
-      <Favorites favorites={favorites} />
+      <Favorites favorites={favorites} onDeleteFavorite={handleDeleteFavorite} onSelectDish={handleSelectDish} />
 
     </div>
   );
